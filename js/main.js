@@ -1,11 +1,13 @@
 
-getLink = window.location.hostname;
-//getLink = "http://localhost:9000/?=10";
+getLink = window.location.search;
+//getLink = "http://localhost:9000/?=5";
 
 var slug = getLink.split('?=').pop();
 
-
+console.log("num here: "+slug);
 // https://poemaday.openwolf.com/1
+
+
 
 
 function main(x)
@@ -31,6 +33,5 @@ function main(x)
  // get db END -----
 
 }
-console.log("num here: "+slug);
-main(slug);
 
+main(slug);
