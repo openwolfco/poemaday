@@ -1,6 +1,6 @@
 
 getLink = window.location.hostname;
-
+//getLink = "http://localhost:9000/?=10";
 
 var slug = getLink.split('?=').pop();
 
@@ -31,5 +31,6 @@ function main(x)
  // get db END -----
 
 }
+console.log("num here: "+slug);
 main(slug);
 
