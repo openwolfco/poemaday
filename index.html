@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy">
+        <meta content="telephone=no" name="format-detection">
+        <meta content="no" name="msapplication-tap-highlight">
+        <meta content="initial-scale=1, width=device-width, viewport-fit=cover" name="viewport"><!--  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  -->
+        <link href="css/normalize.css" rel="stylesheet" type="text/css">
+        <link href="css/index.css" rel="stylesheet" type="text/css">
+        <link href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" rel="stylesheet" type="text/css">
+        
+        <script src="js/modernizr.custom.js">
+        </script>
+        <title>
+            POEM A DAY
+        </title>
+    </head>
+    <body style=" background: #F5F5F5;">
+        <header class="toolbar toolbar-header" style="min-height: 3%;padding-top:5px">
+
+            <h1 class="centerify">
+         		<img height="30px" src="img/poemaday.png">
+                Poem A Day
+
+            </h1>
+
+        </header>
+
+
+
+<div class="poem-wrapper">
+  <div class="poem-header">
+    <h2 id="title">Poetry App</h2>
+
+    <em id="by-1">By</em> <em id="author">OPENWOLF</em> 
+  </div>
+  <div class="poem-content">
+    <blockquote id="poem">
+      Poem a Day brings you a new poem every midnight. <br><br>Curated by writer and poet <br>Jaya Mishra <br>
+      <a href="https://jayamishra.com">jayamishra.com</a>
+      <br>Download <a href="https://poemaday.openwolf.com/download/">here</a>.
+    </blockquote>    
+  </div>
+</div>
+
+<div class="social-buttons">
+  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://poemaday.openwolf.com/download/" class="social-buttons__button social-button social-button--facebook" aria-label="Facebook">
+    <span class="social-button__inner">
+     <i class="fab fa-facebook-f"></i>
+    </span>
+  </a>
+  <a target="_blank"  href="mailto:%7Bemail_address%7D?subject=POEM%20A%20DAY&body=https://poemaday.openwolf.com/download/%20New%20Poems%20Everyday%20-%20App%20for%20Android" class="social-buttons__button social-button social-button--linkedin" aria-label="LinkedIn">
+    <span class="social-button__inner">
+     <i class="fa fa-envelope"></i>
+    </span>
+  </a>
+  <a  target="_blank" href="https://twitter.com/home?status=https://poemaday.openwolf.com/download/" class="social-buttons__button social-button social-button--snapchat" aria-label="SnapChat">
+    <span style="color:#1DA1F2" class="social-button__inner">
+     <i class="fab fa-twitter"></i>
+    </span>
+  </a>
+  <a target="_blank"  href="https://pinterest.com/pin/create/button/?url=https://poemaday.openwolf.com/download/&media=&description=POEM A DAY" class="social-buttons__button social-button social-button--codepen" aria-label="CodePen">
+    <span class="social-button__inner">
+     <i class="fab fa-pinterest-p"></i>
+    </span>
+  </a>
+    <a target="_blank"  href="whatsapp://send?text=https://poemaday.openwolf.com/download/" class="social-buttons__button social-button social-button--codepen" aria-label="CodePen">
+    <span class="social-button__inner">
+     <i class="fab fa-whatsapp"></i>
+    </span>
+  </a>
+
+
+</div>
+
+
+
+
+        <footer data-role="footer" data-position="fixed" data-theme='b' data-tap-toggle="false" class="toolbar toolbar-footer fix-footer">
+
+
+        </footer>
+
+
+        <script src="js/jquery.js"></script>
+        <script src="js/main.js"></script>
+
+
+        </script>
+
+    </body>
+</html>
