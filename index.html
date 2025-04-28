@@ -10,6 +10,11 @@
         body { font-family: 'Roboto', sans-serif; }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
         .poem-bg { background-color: #0D0D0D; }
+        .background-image {
+            background-image: url('https://res.cloudinary.com/dn4n3lljr/image/upload/v1745831410/test/pday.jpg');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -22,31 +27,46 @@
             Poem A Day
         </div>
         <div>
-            <button class="px-5 py-2 bg-orange-500 text-white rounded-full">Subscribe</button>
+            <button onclick="openModal()" class="px-5 py-2 bg-orange-500 text-white rounded-full">Share</button>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="flex flex-grow">
-        <section class="w-1/2 flex flex-col justify-center p-12">
-            <h1 id="title" class="text-5xl font-bold mb-8">Poetry App</h1>
-            <div id="author" class="text-xl text-gray-600 mb-6"></div>
-            <div id="poem" class="text-lg leading-relaxed"></div>
-            <div class="mt-10">
-                <a href="https://poemaday.openwolf.com/download/">
-                    <img class="w-40" src="img/android.png" alt="Download Android App">
-                </a>
-            </div>
+        <section class="w-1/2 poem-bg p-12 flex flex-col justify-center">
+            <h1 id="title" class="text-5xl font-bold text-gray-100 mb-8">Poetry App</h1>
+            <div id="author" class="text-xl text-gray-300 mb-6"></div>
+            <div id="poem" class="text-lg text-gray-200 leading-relaxed"></div>
         </section>
 
-        <section class="w-1/2 poem-bg p-12 flex items-center justify-center">
-            <div class="rounded-lg p-8 text-gray-100">
+        <section class="w-1/2 background-image flex items-center justify-center p-12">
+            <div class="rounded-lg p-8 bg-black bg-opacity-50 text-gray-100">
                 <h2 class="text-3xl font-semibold mb-4">Daily Dose of Poetry</h2>
                 <p class="italic">"A poem begins as a lump in the throat, a sense of wrong, a homesickness, a lovesickness."</p>
                 <p class="text-sm mt-4">– Robert Frost</p>
+                <div class="mt-10">
+                    <a href="https://poemaday.openwolf.com/download/">
+                        <img class="w-40" src="img/android.png" alt="Download Android App">
+                    </a>
+                </div>
             </div>
         </section>
     </main>
+
+    <!-- Modal -->
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
+        <div class="bg-white p-8 rounded-lg text-center">
+            <h3 class="text-xl font-semibold mb-4">Share this Poem</h3>
+            <div class="flex justify-center gap-4 mb-4">
+                <a id="shareFacebook" href="#" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook"></i></a>
+                <a id="shareInstagram" href="#" class="text-pink-500 hover:text-pink-700"><i class="fab fa-instagram"></i></a>
+                <a id="shareSnapchat" href="#" class="text-yellow-400 hover:text-yellow-600"><i class="fab fa-snapchat-ghost"></i></a>
+                <a id="sharePinterest" href="#" class="text-red-600 hover:text-red-800"><i class="fab fa-pinterest"></i></a>
+                <a id="shareX" href="#" class="text-black hover:text-gray-700"><i class="fab fa-x-twitter"></i></a>
+            </div>
+            <button onclick="closeModal()" class="mt-4 bg-orange-500 text-white px-4 py-2 rounded-full">Close</button>
+        </div>
+    </div>
 
     <!-- Social Buttons Footer -->
     <footer class="bg-gray-100 py-4">
@@ -70,7 +90,23 @@
                 document.getElementById("title").innerText = poemData.title;
                 document.getElementById("author").innerText = "by " + poemData.author;
                 document.getElementById("poem").innerHTML = poemData.poem;
+
+                document.getElementById("shareFacebook").href = `https://www.facebook.com/sharer/sharer.php?u=${poemData.link}`;
+                document.getElementById("shareInstagram").href = `https://www.instagram.com/?url=${poemData.link}`;
+                document.getElementById("shareSnapchat").href = `https://www.snapchat.com/scan?attachmentUrl=${poemData.link}`;
+                document.getElementById("sharePinterest").href = `https://pinterest.com/pin/create/button/?url=${poemData.link}`;
+                document.getElementById("shareX").href = `https://twitter.com/intent/tweet?url=${poemData.link}`;
             });
+    }
+
+    function openModal() {
+        document.getElementById("shareModal").classList.remove("hidden");
+        document.getElementById("shareModal").classList.add("flex");
+    }
+
+    function closeModal() {
+        document.getElementById("shareModal").classList.add("hidden");
+        document.getElementById("shareModal").classList.remove("flex");
     }
 
     let params = new URLSearchParams(window.location.search);
