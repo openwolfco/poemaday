@@ -1,36 +1,29 @@
+<script>
+    function loadPoem(slug) {
+        fetch("js/db.json")
+            .then(response => response.json())
+            .then(data => {
+                const poemData = data.data[slug];
+                document.getElementById("title").innerText = poemData.title;
+                document.getElementById("author").innerText = "by " + poemData.author;
+                document.getElementById("poem").innerHTML = poemData.poem;
 
-getLink = window.location.search;
-//getLink = "http://localhost:9000/?=5";
-
-var slug = getLink.split('?=').pop();
-
-console.log("num here: "+slug);
-
-
-
-
-function main(x)
-{
- // get db.Json
-           var xmlhttp = new XMLHttpRequest();
-           xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-              var myObj = JSON.parse(this.responseText);
-              document.getElementById("title").innerHTML = myObj.data[x].title;
-              document.getElementById("author").innerHTML = myObj.data[x].author;
-              document.getElementById("poem").innerHTML = myObj.data[x].poem;
-              var getId = myObj.data[x].id;
-
-            }
-           };
-           xmlhttp.open("GET", "js/db.json", true);
-           xmlhttp.send();
- // get db END -----
-
-}
-
-
-main(slug);
-
-
-
+                const link = poemData.link || "https://poemaday.openwolf.com";
+                document.getElementById("shareFacebook").href = `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+                document.getElementById("shareTwitter").href = `https://twitter.com/intent/tweet?url=${link}`;
+                document.getElementById("sharePinterest").href = `https://pinterest.com/pin/create/button/?url=${link}`;
+                document.getElementById("shareWhatsapp").href = `https://api.whatsapp.com/send?text=${link}`;
+                document.getElementById("copyLink").innerText = link;
+            })
+            .catch(error => {
+                // fallback if db.json fails
+                console.error('Error loading poems:', error);
+                const fallbackLink = "https://poemaday.openwolf.com";
+                document.getElementById("shareFacebook").href = `https://www.facebook.com/sharer/sharer.php?u=${fallbackLink}`;
+                document.getElementById("shareTwitter").href = `https://twitter.com/intent/tweet?url=${fallbackLink}`;
+                document.getElementById("sharePinterest").href = `https://pinterest.com/pin/create/button/?url=${fallbackLink}`;
+                document.getElementById("shareWhatsapp").href = `https://api.whatsapp.com/send?text=${fallbackLink}`;
+                document.getElementById("copyLink").innerText = fallbackLink;
+            });
+    }
+</script>
