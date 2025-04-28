@@ -1,102 +1,86 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy">
-        <meta content="telephone=no" name="format-detection">
-        <meta content="no" name="msapplication-tap-highlight">
-        <meta content="initial-scale=1, width=device-width, viewport-fit=cover" name="viewport"><!--  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">  -->
-        <link href="css/normalize.css" rel="stylesheet" type="text/css">
-        <link href="css/index.css" rel="stylesheet" type="text/css">
-        <link href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" rel="stylesheet" type="text/css">
-        
-        <script src="js/modernizr.custom.js">
-        </script>
-        <title>
-            POEM A DAY
-        </title>
-    </head>
-    <body style=" background: #F5F5F5;">
-        <header class="toolbar toolbar-header" style="min-height: 3%;padding-top:5px">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Poem A Day</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .poem-bg { background-color: #0D0D0D; }
+    </style>
+</head>
+<body class="bg-gray-50">
 
-            <h1 class="centerify">
-         		<img height="30px" src="img/poemaday.png">
-                Poem A Day
+<div class="flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-8 py-4 bg-white shadow-md">
+        <div class="text-2xl font-semibold flex items-center gap-3">
+            <img src="img/poemaday.png" alt="Poem A Day" class="h-8 w-auto">
+            Poem A Day
+        </div>
+        <div>
+            <button class="px-5 py-2 bg-orange-500 text-white rounded-full">Subscribe</button>
+        </div>
+    </nav>
 
-            </h1>
+    <!-- Main Content -->
+    <main class="flex flex-grow">
+        <section class="w-1/2 flex flex-col justify-center p-12">
+            <h1 id="title" class="text-5xl font-bold mb-8">Poetry App</h1>
+            <div id="author" class="text-xl text-gray-600 mb-6"></div>
+            <div id="poem" class="text-lg leading-relaxed"></div>
+            <div class="mt-10">
+                <a href="https://poemaday.openwolf.com/download/">
+                    <img class="w-40" src="img/android.png" alt="Download Android App">
+                </a>
+            </div>
+        </section>
 
-        </header>
+        <section class="w-1/2 poem-bg p-12 flex items-center justify-center">
+            <div class="rounded-lg p-8 text-gray-100">
+                <h2 class="text-3xl font-semibold mb-4">Daily Dose of Poetry</h2>
+                <p class="italic">"A poem begins as a lump in the throat, a sense of wrong, a homesickness, a lovesickness."</p>
+                <p class="text-sm mt-4">– Robert Frost</p>
+            </div>
+        </section>
+    </main>
 
-
-
-<div class="poem-wrapper">
-  <div class="poem-header">
-    <h2 id="title">Poetry App</h2>
-
-    
-  </div>
-  <div class="poem-content">
-    <blockquote id="poem">
-      <br>
-      <a href="https://poemaday.openwolf.com/download/">
-      <img width="200px" height="auto" src="img/android.png" />
-  	  </a>
-    </blockquote>    
-  </div>
+    <!-- Social Buttons Footer -->
+    <footer class="bg-gray-100 py-4">
+        <div class="flex justify-center gap-6">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://poemaday.openwolf.com/download/" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook-f"></i></a>
+            <a href="mailto:?subject=POEM%20A%20DAY&body=https://poemaday.openwolf.com/download/" class="text-gray-700 hover:text-gray-900"><i class="fa fa-envelope"></i></a>
+            <a href="https://twitter.com/home?status=https://poemaday.openwolf.com/download/" class="text-blue-400 hover:text-blue-600"><i class="fab fa-twitter"></i></a>
+            <a href="https://pinterest.com/pin/create/button/?url=https://poemaday.openwolf.com/download/" class="text-red-600 hover:text-red-800"><i class="fab fa-pinterest-p"></i></a>
+            <a href="whatsapp://send?text=https://poemaday.openwolf.com/download/" class="text-green-500 hover:text-green-700"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
 </div>
 
-<div class="social-buttons">
-  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://poemaday.openwolf.com/download/" class="social-buttons__button social-button social-button--facebook" aria-label="Facebook">
-    <span class="social-button__inner">
-     <i class="fab fa-facebook-f"></i>
-    </span>
-  </a>
-  <a target="_blank"  href="mailto:%7Bemail_address%7D?subject=POEM%20A%20DAY&body=https://poemaday.openwolf.com/download/%20New%20Poems%20Everyday%20-%20App%20for%20Android" class="social-buttons__button social-button social-button--linkedin" aria-label="LinkedIn">
-    <span class="social-button__inner">
-     <i class="fa fa-envelope"></i>
-    </span>
-  </a>
-  <a  target="_blank" href="https://twitter.com/home?status=https://poemaday.openwolf.com/download/" class="social-buttons__button social-button social-button--snapchat" aria-label="SnapChat">
-    <span style="color:#1DA1F2" class="social-button__inner">
-     <i class="fab fa-twitter"></i>
-    </span>
-  </a>
-  <a target="_blank"  href="https://pinterest.com/pin/create/button/?url=https://poemaday.openwolf.com/download/&media=&description=POEM A DAY" class="social-buttons__button social-button social-button--codepen" aria-label="CodePen">
-    <span class="social-button__inner">
-     <i class="fab fa-pinterest-p"></i>
-    </span>
-  </a>
-    <a target="_blank"  href="whatsapp://send?text=https://poemaday.openwolf.com/download/" class="social-buttons__button social-button social-button--codepen" aria-label="CodePen">
-    <span class="social-button__inner">
-     <i class="fab fa-whatsapp"></i>
-    </span>
-  </a>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+    function loadPoem(slug) {
+        fetch("js/db.json")
+            .then(response => response.json())
+            .then(data => {
+                const poemData = data.data[slug];
+                document.getElementById("title").innerText = poemData.title;
+                document.getElementById("author").innerText = "by " + poemData.author;
+                document.getElementById("poem").innerHTML = poemData.poem;
+            });
+    }
 
+    let params = new URLSearchParams(window.location.search);
+    let slug = params.get('');
+    if (slug !== null) {
+        loadPoem(slug);
+    } else {
+        loadPoem(0);  // default to the first poem
+    }
+</script>
 
-</div>
-
-
-
-
-        <footer data-role="footer" data-position="fixed" data-theme='b' data-tap-toggle="false" class="toolbar toolbar-footer fix-footer">
-
-
-        </footer>
-
-
-        <script src="js/jquery.js"></script>
-        <script src="js/main.js"></script>
-
-
-        </script>
-
-    </body>
+</body>
 </html>
