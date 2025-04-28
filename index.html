@@ -15,6 +15,18 @@
             background-size: cover;
             background-position: center;
         }
+        .fade-enter {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .fade-enter-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .modal-bg {
+            backdrop-filter: blur(4px);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -32,27 +44,27 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="flex flex-grow">
-        <section class="w-1/2 poem-bg p-12 flex flex-col justify-center">
-            <h1 id="title" class="text-5xl font-bold text-gray-100 mb-8">Poetry App</h1>
-            <div id="author" class="text-xl text-gray-300 mb-6"></div>
-            <div id="poem" class="text-lg text-gray-200 leading-relaxed"></div>
-        </section>
-
-        <section class="w-1/2 background-image flex items-center justify-center p-12">
+    <main class="flex flex-col md:flex-row flex-grow">
+        <section class="w-full md:w-1/2 background-image flex items-center justify-center p-8 md:p-12">
             <div class="rounded-lg p-8 bg-black bg-opacity-50 text-gray-100">
                 <h2 class="text-3xl font-semibold mb-4">Daily Dose of Poetry</h2>
                 <p class="italic">"A poem begins as a lump in the throat, a sense of wrong, a homesickness, a lovesickness."</p>
                 <p class="text-sm mt-4">– Robert Frost</p>
             </div>
         </section>
+
+        <section class="w-full md:w-1/2 poem-bg p-8 md:p-12 flex flex-col justify-center">
+            <h1 id="title" class="text-4xl md:text-5xl font-bold text-gray-100 mb-6">Poetry App</h1>
+            <div id="author" class="text-lg md:text-xl text-gray-300 mb-4"></div>
+            <div id="poem" class="text-base md:text-lg text-gray-200 leading-relaxed"></div>
+        </section>
     </main>
 
     <!-- Modal -->
-    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center">
-        <div class="bg-white p-8 rounded-lg text-center">
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center modal-bg">
+        <div class="bg-white p-8 rounded-lg text-center fade-enter shadow-2xl">
             <h3 class="text-xl font-semibold mb-4">Share this Poem</h3>
-            <div class="flex justify-center gap-4 mb-4">
+            <div class="flex justify-center gap-6 mb-4 text-2xl">
                 <a id="shareFacebook" href="#" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook"></i></a>
                 <a id="shareInstagram" href="#" class="text-pink-500 hover:text-pink-700"><i class="fab fa-instagram"></i></a>
                 <a id="shareSnapchat" href="#" class="text-yellow-400 hover:text-yellow-600"><i class="fab fa-snapchat-ghost"></i></a>
@@ -95,13 +107,23 @@
     }
 
     function openModal() {
-        document.getElementById("shareModal").classList.remove("hidden");
-        document.getElementById("shareModal").classList.add("flex");
+        const modal = document.getElementById("shareModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        const modalContent = modal.querySelector('.fade-enter');
+        setTimeout(() => {
+            modalContent.classList.add("fade-enter-active");
+        }, 10);
     }
 
     function closeModal() {
-        document.getElementById("shareModal").classList.add("hidden");
-        document.getElementById("shareModal").classList.remove("flex");
+        const modal = document.getElementById("shareModal");
+        const modalContent = modal.querySelector('.fade-enter');
+        modalContent.classList.remove("fade-enter-active");
+        setTimeout(() => {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }, 300);
     }
 
     let params = new URLSearchParams(window.location.search);
@@ -109,7 +131,7 @@
     if (slug !== null) {
         loadPoem(slug);
     } else {
-        loadPoem(0);  // default to the first poem
+        loadPoem(0);
     }
 </script>
 
