@@ -27,6 +27,33 @@
         .modal-bg {
             backdrop-filter: blur(4px);
         }
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        @keyframes fadein {
+            from { bottom: 0; opacity: 0; }
+            to { bottom: 30px; opacity: 1; }
+        }
+        @keyframes fadeout {
+            from { bottom: 30px; opacity: 1; }
+            to { bottom: 0; opacity: 0; }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -62,18 +89,23 @@
 
     <!-- Modal -->
     <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center modal-bg">
-        <div class="bg-white p-8 rounded-lg text-center fade-enter shadow-2xl">
-            <h3 class="text-xl font-semibold mb-4">Share this Poem</h3>
-            <div class="flex justify-center gap-6 mb-4 text-2xl">
-                <a id="shareFacebook" href="#" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook"></i></a>
-                <a id="shareInstagram" href="#" class="text-pink-500 hover:text-pink-700"><i class="fab fa-instagram"></i></a>
-                <a id="shareSnapchat" href="#" class="text-yellow-400 hover:text-yellow-600"><i class="fab fa-snapchat-ghost"></i></a>
-                <a id="sharePinterest" href="#" class="text-red-600 hover:text-red-800"><i class="fab fa-pinterest"></i></a>
-                <a id="shareX" href="#" class="text-black hover:text-gray-700"><i class="fab fa-x-twitter"></i></a>
+        <div class="bg-white p-8 rounded-lg text-center fade-enter shadow-2xl max-w-sm w-full">
+            <h3 class="text-xl font-semibold mb-6">Share this Poem</h3>
+            <div class="flex flex-wrap justify-center gap-6 text-2xl mb-6">
+                <a id="shareFacebook" href="#" target="_blank" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook"></i></a>
+                <a id="shareTwitter" href="#" target="_blank" class="text-black hover:text-gray-700"><i class="fab fa-x-twitter"></i></a>
+                <a id="sharePinterest" href="#" target="_blank" class="text-red-600 hover:text-red-800"><i class="fab fa-pinterest"></i></a>
+                <a id="shareWhatsapp" href="#" target="_blank" class="text-green-500 hover:text-green-700"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <button onclick="closeModal()" class="mt-4 bg-orange-500 text-white px-4 py-2 rounded-full">Close</button>
+            <div class="text-sm text-gray-600">Instagram and Snapchat sharing requires copying the link manually.</div>
+            <div class="mt-2 bg-gray-100 rounded p-2 break-words text-gray-700 text-xs" id="copyLink">Loading...</div>
+            <button onclick="copyToClipboard()" class="mt-2 px-4 py-2 bg-orange-500 text-white rounded-full text-sm">Copy Link</button>
+            <button onclick="closeModal()" class="mt-4 block w-full bg-gray-300 text-gray-700 py-2 rounded-full">Close</button>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">Link copied to clipboard!</div>
 
     <!-- Social Buttons Footer -->
     <footer class="bg-gray-100 py-4">
@@ -99,10 +131,10 @@
                 document.getElementById("poem").innerHTML = poemData.poem;
 
                 document.getElementById("shareFacebook").href = `https://www.facebook.com/sharer/sharer.php?u=${poemData.link}`;
-                document.getElementById("shareInstagram").href = `https://www.instagram.com/?url=${poemData.link}`;
-                document.getElementById("shareSnapchat").href = `https://www.snapchat.com/scan?attachmentUrl=${poemData.link}`;
+                document.getElementById("shareTwitter").href = `https://twitter.com/intent/tweet?url=${poemData.link}`;
                 document.getElementById("sharePinterest").href = `https://pinterest.com/pin/create/button/?url=${poemData.link}`;
-                document.getElementById("shareX").href = `https://twitter.com/intent/tweet?url=${poemData.link}`;
+                document.getElementById("shareWhatsapp").href = `https://api.whatsapp.com/send?text=${poemData.link}`;
+                document.getElementById("copyLink").innerText = poemData.link;
             });
     }
 
@@ -124,6 +156,15 @@
             modal.classList.add("hidden");
             modal.classList.remove("flex");
         }, 300);
+    }
+
+    function copyToClipboard() {
+        const copyText = document.getElementById("copyLink").innerText;
+        navigator.clipboard.writeText(copyText).then(() => {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        });
     }
 
     let params = new URLSearchParams(window.location.search);
